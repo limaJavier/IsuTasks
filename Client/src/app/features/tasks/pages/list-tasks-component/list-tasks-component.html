@@ -1,0 +1,15 @@
+<header-component [authorized]="true" [backUrl]="null" />
+
+<ul>
+  <button (click)="goToUpsertTask()">Add Task</button>
+  @for (task of tasks; track task.id) {
+  <li>
+    <div class="task-container">
+      <input type="checkbox" [checked]="task.isCompleted" (click)="toggleTask(task)" />
+      <a [routerLink]="['/tasks', task.id, 'details']">{{ task.title }} | {{ task.dueDate }}</a>
+      <button (click)="goToUpsertTask(task.id)">Update</button>
+      <button (click)="deleteTask(task.id)">Delete</button>
+    </div>
+  </li>
+  }
+</ul>
