@@ -1,2 +1,3 @@
-@taskId=97f7d95d-93ee-4b96-85b6-d62879f0dbe3
+@taskId=fe0f4cac-41a5-477e-a4cb-7e11a463a8c1
 DELETE {{host}}/tasks/{{taskId}}
+Authorization: Bearer {{accessToken}}

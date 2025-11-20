@@ -5,3 +5,13 @@ Content-Type: application/json
     "email": "john@mail.com",
     "password": "password"
 }
+
+###
+
+POST {{host}}/auth/register
+Content-Type: application/json
+
+{
+    "email": "julia@mail.com",
+    "password": "wordpass"
+}

@@ -1,5 +1,6 @@
-@taskId=15706029-03b7-44e7-8be3-dd0cbe9f2643
+@taskId=8c524299-4385-4dbb-acd6-23ebe7510693
 PUT {{host}}/tasks
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {

@@ -1,1 +1,2 @@
 GET {{host}}/tasks
+Authorization: Bearer {{accessToken}}

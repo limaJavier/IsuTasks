@@ -1,2 +1,3 @@
-@taskId=016b70fd-0ffb-45b4-8077-39e53329bfde
+@taskId=8c524299-4385-4dbb-acd6-23ebe7510693
 GET {{host}}/tasks/{{taskId}}
+Authorization: Bearer {{accessToken}}

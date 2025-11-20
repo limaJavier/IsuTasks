@@ -24,11 +24,15 @@ public class TaskService(IsuTasksDbContext dbContext) : ITaskService
         }
     }
 
-    public async Task<Result> DeleteTaskAsync(Guid id)
+    public async Task<Result> DeleteTaskAsync(Guid taskId, Guid userId)
     {
-        var task = await _dbContext.Tasks.FirstOrDefaultAsync(task => task.Id == id);
+        var task = await _dbContext.Tasks
+            .FirstOrDefaultAsync(task =>
+                task.Id == taskId &&
+                task.UserId == userId
+            );
         if (task is null)
-            return Error.NotFound($"Task with ID {id} was not found");
+            return Error.NotFound($"Task with ID {taskId} was not found");
 
         try
         {
@@ -42,26 +46,35 @@ public class TaskService(IsuTasksDbContext dbContext) : ITaskService
         }
     }
 
-    public async Task<Result<IsuTask>> GetTaskByIdAsync(Guid id)
+    public async Task<Result<IsuTask>> GetTaskByIdAsync(Guid taskId, Guid userId)
     {
-        var task = await _dbContext.Tasks.FirstOrDefaultAsync(task => task.Id == id);
+        var task = await _dbContext.Tasks
+            .FirstOrDefaultAsync(task =>
+                task.Id == taskId &&
+                task.UserId == userId
+            );
 
         if (task is null)
-            return Error.NotFound($"Task with ID {id} was not found");
+            return Error.NotFound($"Task with ID {taskId} was not found");
         else
             return task;
     }
 
-    public async Task<Result<List<IsuTask>>> GetTasksAsync()
+    public async Task<Result<List<IsuTask>>> GetTasksAsync(Guid userId)
     {
-        return await _dbContext.Tasks.ToListAsync();
+        return await _dbContext.Tasks
+            .Where(task => task.UserId == userId)
+            .ToListAsync();
     }
 
     /// <summary>
     /// This method assumes that the given task is being tracked by EF Core, therefore we only need to "SaveChanges"
     /// </summary>
-    public async Task<Result> UpdateTaskAsync(IsuTask _)
+    public async Task<Result> UpdateTaskAsync(IsuTask task, Guid userId)
     {
+        if (task.UserId != userId)
+            return Error.NotFound($"Task with ID {task.Id} was not found");
+
         try
         {
             await _dbContext.SaveChangesAsync();

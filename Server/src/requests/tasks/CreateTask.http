@@ -1,8 +1,9 @@
 POST {{host}}/tasks
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "title": "Title 5",
+    "title": "Title 1",
     "description": "Description",
     "dueDate": "2025-11-20T16:34:09.800Z",
     "isCompleted": false
