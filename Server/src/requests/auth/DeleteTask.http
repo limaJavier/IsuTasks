@@ -1,0 +1,2 @@
+@taskId=97f7d95d-93ee-4b96-85b6-d62879f0dbe3
+DELETE {{host}}/tasks/{{taskId}}

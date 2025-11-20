@@ -1,0 +1,2 @@
+@taskId=016b70fd-0ffb-45b4-8077-39e53329bfde
+GET {{host}}/tasks/{{taskId}}

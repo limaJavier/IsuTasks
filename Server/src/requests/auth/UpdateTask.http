@@ -1,0 +1,11 @@
+@taskId=97f7d95d-93ee-4b96-85b6-d62879f0dbe3
+PUT {{host}}/tasks
+Content-Type: application/json
+
+{
+    "id":"{{taskId}}",
+    "title": "Updated Title",
+    "description": "Updated Description",
+    "dueDate": "2025-11-20T16:34:09.800Z",
+    "isCompleted": true
+}
