@@ -1,0 +1,16 @@
+<div class="header">
+  @if (backUrl) {
+  <button [routerLink]="backUrl">Back</button>
+  }
+
+  <p>ISU Tasks</p>
+
+  <div class="auth-container">
+    @if (authorized === false) {
+    <button routerLink="/register">Register</button>
+    <button routerLink="/login">Login</button>
+    } @if (authorized === true) {
+    <button (click)="logout()">Logout</button>
+    }
+  </div>
+</div>
