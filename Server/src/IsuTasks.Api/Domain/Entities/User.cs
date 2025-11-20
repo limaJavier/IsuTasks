@@ -7,5 +7,6 @@ public class User
     public string Password { get; set; } = null!;
 
     // Relational properties
-    public ICollection<IsuTask> Tasks { get; set; } = null!;
+    public List<IsuTask> Tasks { get; set; } = null!;
+    public List<RefreshToken> RefreshTokens { get; set; } = null!;
 }

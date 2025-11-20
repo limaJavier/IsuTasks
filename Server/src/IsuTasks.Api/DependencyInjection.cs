@@ -2,6 +2,7 @@ using System.Text;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using IsuTasks.Api.Persistence;
+using IsuTasks.Api.Services.Auth;
 using IsuTasks.Api.Services.Tasks;
 using Mapster;
 using MapsterMapper;
@@ -25,13 +26,16 @@ public static class DependencyInjection
 
     private static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<IsuTasksDbContext>(options => 
-            options.UseSqlite(configuration.GetConnectionString(connectionStringKey)));
-            
+        services.AddDbContext<IsuTasksDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString(connectionStringKey)));
+
         services.AddFastEndpoints()
             .SwaggerDocument();
 
         services.AddScoped<ITaskService, TaskService>();
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddSingleton<ITokenGenerator, TokenGenerator>();
+        services.AddSingleton<IHasher, Hasher>();
 
         return services;
     }
@@ -51,8 +55,8 @@ public static class DependencyInjection
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
 
-                ValidIssuer = "lavia.auth",
-                ValidAudience = "lavia",
+                ValidIssuer = "isu.task.auth",
+                ValidAudience = "isu.task",
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("An at least 256 bits signing key")), // TODO: Save credential info in a secure place
             };
         });
@@ -70,6 +74,7 @@ public static class DependencyInjection
         config.Scan(
             typeof(DependencyInjection).Assembly
         );
+        
         services.AddSingleton(config);
         services.AddScoped<IMapper, ServiceMapper>();
         return services;
