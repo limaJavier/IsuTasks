@@ -1,0 +1,17 @@
+<header-component [authorized]="null" [backUrl]="'/'" />
+
+<form [formGroup]="form" (ngSubmit)="$event.preventDefault();submitForm()">
+  <div>
+    <label>Email</label>
+    <input type="text" formControlName="email"/>
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input type="text" formControlName="password" />
+  </div>
+
+  <div>
+    <button type="submit" [disabled]="form.invalid">Enter</button>
+  </div>
+</form>
