@@ -6,6 +6,8 @@ import { HeaderComponent } from '../../../../shared/components/header-component/
 import { TaskService } from '../../services/taskService';
 import { AuthService } from '../../../../shared/services/authService';
 import { handleServerError } from '../../utils/errorHandling';
+import { getValidationMessage } from '../../../../shared/utils/formValidation';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-upsert-task-component',
@@ -16,6 +18,7 @@ import { handleServerError } from '../../utils/errorHandling';
 export class UpsertTaskComponent implements OnInit {
   task!: Task | null;
   form!: FormGroup;
+  validationMessage: string | null = null;
 
   constructor(
     private readonly router: Router,
@@ -45,6 +48,8 @@ export class UpsertTaskComponent implements OnInit {
   }
 
   submitForm() {
+    this.validationMessage = null;
+
     if (this.form.valid) {
       const task = {
         id: this.task ? this.task.id : '',
@@ -56,15 +61,17 @@ export class UpsertTaskComponent implements OnInit {
 
       if (this.task) {
         this.taskService.updateTask(task).subscribe({
-          error: (err) => handleServerError(err, this.authService, this.router),
+          error: (err) => this.handleError(err)
         });
       } else {
         this.taskService.createTask(task).subscribe({
-          error: (err) => handleServerError(err, this.authService, this.router),
+          error: (err) => this.handleError(err)
         });
       }
 
       this.router.navigate(['tasks']);
+    } else {
+      this.validationMessage = this.getValidationMessage();
     }
   }
 
@@ -78,5 +85,40 @@ export class UpsertTaskComponent implements OnInit {
       ),
       taskIsCompleted: new FormControl(this.task ? this.task.isCompleted : false),
     });
+  }
+
+  private getValidationMessage() {
+    return getValidationMessage(
+      [
+        {
+          field: 'taskTitle',
+          type: 'required',
+          message: 'Title is a required field',
+        },
+        {
+          field: 'taskDescription',
+          type: 'required',
+          message: 'Description is a required field',
+        },
+        {
+          field: 'taskDueDate',
+          type: 'required',
+          message: 'Due Date is a required field',
+        },
+      ],
+      this.form
+    );
+  }
+
+  private handleError(err: Error) {
+    if (
+      err instanceof HttpErrorResponse &&
+      err.status !== HttpStatusCode.InternalServerError &&
+      err.status !== HttpStatusCode.Unauthorized
+    ) {
+      this.validationMessage = err.error.title;
+    }
+
+    handleServerError(err, this.authService, this.router);
   }
 }

@@ -3,6 +3,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent } from '../../../../shared/components/header-component/header-component';
 import { AuthService } from '../../../../shared/services/authService';
+import { getValidationMessage } from '../../../../shared/utils/formValidation';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-auth-component',
@@ -16,6 +18,7 @@ export class AuthComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
+  validationMessage: string | null = null;
 
   constructor(
     private readonly router: Router,
@@ -36,6 +39,8 @@ export class AuthComponent implements OnInit {
   }
 
   submitForm() {
+    this.validationMessage = null;
+    
     if (this.form.valid) {
       if (this.register) {
         this.authService
@@ -47,7 +52,7 @@ export class AuthComponent implements OnInit {
             next: (_) => {
               this.router.navigate(['/tasks']);
             },
-            error: (err) => console.error(err),
+            error: (err) => this.handleError(err),
           });
       } else {
         this.authService
@@ -59,9 +64,45 @@ export class AuthComponent implements OnInit {
             next: (_) => {
               this.router.navigate(['/tasks']);
             },
-            error: (err) => console.error(err),
+            error: (err) => this.handleError(err),
           });
       }
+    } else {
+      this.validationMessage = this.getValidationMessage();
+    }
+  }
+
+  private getValidationMessage() {
+    return getValidationMessage(
+      [
+        {
+          field: 'password',
+          type: 'required',
+          message: 'Password is a required field',
+        },
+        {
+          field: 'password',
+          type: 'minlength',
+          message: 'Password must be 8 characters at least',
+        },
+        {
+          field: 'email',
+          type: 'required',
+          message: 'Email is a required field',
+        },
+        {
+          field: 'email',
+          type: 'email',
+          message: 'Email must be in a valid format',
+        },
+      ],
+      this.form
+    );
+  }
+
+  private handleError(err: Error) {
+    if (err instanceof HttpErrorResponse && err.status !== HttpStatusCode.InternalServerError) {
+      this.validationMessage = err.error.title;
     }
   }
 }

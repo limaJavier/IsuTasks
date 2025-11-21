@@ -11,9 +11,11 @@
     </div>
 
     <div>
-      <button type="submit" [disabled]="form.invalid">Enter</button>
+      <button type="submit">Enter</button>
     </div>
   </form>
   
-  <p class="validation-message">Cuba Libre!</p>
+  @if(validationMessage) {
+    <p class="validation-message">{{validationMessage}}</p>
+  }
 </div>
