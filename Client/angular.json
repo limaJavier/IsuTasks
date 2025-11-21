@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "isutask": {
+    "isutasks": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -59,10 +59,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "isutask:build:production"
+              "buildTarget": "isutasks:build:production"
             },
             "development": {
-              "buildTarget": "isutask:build:development"
+              "buildTarget": "isutasks:build:development"
             }
           },
           "defaultConfiguration": "development"
