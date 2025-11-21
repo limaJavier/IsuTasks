@@ -4,11 +4,7 @@ A minimalist **Task Management** full-stack web application built with **Angular
 
 The project is fully containerized with Docker for easy local development and deployment.
 
----
-
 ## 📦 Running the App (via Docker)
-
-### **1. Build and start all services**
 
 From the project root:
 
@@ -22,11 +18,9 @@ Services exposed:
 * **API** → http://localhost:9090
 * **Database** → localhost:25432
 
----
-
 ## 🛠 Running Locally (without Docker)
 
-### **Client (Angular)**
+### Client (Angular)
 
 ```bash
 $ cd Client
@@ -36,7 +30,7 @@ $ ng serve
 
 Runs at: http://localhost:4200
 
-### **Server (.NET API)**
+### Server (.NET API)
 
 ```bash
 $ cd Server
@@ -46,12 +40,10 @@ $ dotnet run --project src/IsuTasks.Api
 
 Runs at: http://localhost:9090
 
-### **Database (PostgreSQL)**
+### Database (PostgreSQL)
 
 You need a local PostgreSQL instance running.
 Update the API connection string accordingly in `appsettings.json`.
-
----
 
 ## 📌 Pending
 
@@ -61,8 +53,6 @@ Update the API connection string accordingly in `appsettings.json`.
 * Treat refresh-tokens as HTTP-only cookies to avoid Cross-Site Scripting (XSS) attacks.
 * Improve server's CORS configuration to increase security.
 * Hold API's url as a environment variable in the client-application.
-
----
 
 ## 📄 License
 
