@@ -1,33 +1,27 @@
 <header-component [authorized]="true" [backUrl]="'/tasks'" />
 
-<form [formGroup]="form" (ngSubmit)="$event.preventDefault(); submitForm()">
-  <div>
-    <label>Title</label>
-    <input type="text" formControlName="taskTitle" />
-  </div>
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="$event.preventDefault(); submitForm()">
+    <div>
+      <input type="text" formControlName="taskTitle" />
+    </div>
 
-  <div>
-    <label>Description</label>
-    <textarea formControlName="taskDescription"></textarea>
-  </div>
+    <div>
+      <textarea formControlName="taskDescription"></textarea>
+    </div>
 
-  <div>
-    <label>Due Date</label>
-    <input
-      type="datetime-local"
-      formControlName="taskDueDate"
-    />
-  </div>
+    <div>
+      <input type="datetime-local" formControlName="taskDueDate" />
+    </div>
 
-  <div>
-    <label>Completed</label>
-    <input
-      type="checkbox"
-      formControlName="taskIsCompleted"
-    />
-  </div>
+    <div>
+      <input type="checkbox" formControlName="taskIsCompleted" />
+    </div>
 
-  <div>
-    <button type="submit" [disabled]="form.invalid">Save</button>
-  </div>
-</form>
+    <div>
+      <button type="submit" [disabled]="form.invalid">Save</button>
+    </div>
+
+    <p class="validation-message">Cuba Libre!</p>
+  </form>
+</div>

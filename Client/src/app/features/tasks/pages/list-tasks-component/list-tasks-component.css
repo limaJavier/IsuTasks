@@ -39,11 +39,6 @@ ul {
   align-items: flex-start;
 }
 
-.checkbox-container input {
-  accent-color: rgb(40, 40, 40);
-  transform: scale(1.5);
-}
-
 .task-details-container {
   flex-grow: 1;
   text-align: left;
