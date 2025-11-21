@@ -64,6 +64,9 @@ public class TaskService(IsuTasksDbContext dbContext) : ITaskService
     {
         return await _dbContext.Tasks
             .Where(task => task.UserId == userId)
+            .OrderBy(task => task.IsCompleted)
+            .ThenBy(task => task.DueDate)
+            .ThenBy(task => task.Title)
             .ToListAsync();
     }
 
