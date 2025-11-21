@@ -1,6 +1,8 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using IsuTasks.Api.Persistence;
 using IsuTasks.Api.Utils;
+using Microsoft.EntityFrameworkCore;
 
 namespace IsuTasks.Api;
 
@@ -16,7 +18,16 @@ public static class Pipeline
         app
             .UseFastEndpoints()
             .UseSwaggerGen();
+        app.ApplyMigrations();
 
+        return app;
+    }
+
+    public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
+    {
+        using var scope = app.ApplicationServices.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<IsuTasksDbContext>();
+        dbContext.Database.Migrate();
         return app;
     }
 }
