@@ -61,15 +61,15 @@ export class UpsertTaskComponent implements OnInit {
 
       if (this.task) {
         this.taskService.updateTask(task).subscribe({
-          error: (err) => this.handleError(err)
+          next: () => this.router.navigate(['tasks']),
+          error: (err) => this.handleError(err),
         });
       } else {
         this.taskService.createTask(task).subscribe({
-          error: (err) => this.handleError(err)
+          next: () => this.router.navigate(['tasks']),
+          error: (err) => this.handleError(err),
         });
       }
-
-      this.router.navigate(['tasks']);
     } else {
       this.validationMessage = this.getValidationMessage();
     }
@@ -77,8 +77,8 @@ export class UpsertTaskComponent implements OnInit {
 
   private setFormGroup() {
     this.form = new FormGroup({
-      taskTitle: new FormControl(this.task?.title, Validators.required),
-      taskDescription: new FormControl(this.task?.description, Validators.required),
+      taskTitle: new FormControl(this.task?.title, [Validators.required, Validators.maxLength(200)]),
+      taskDescription: new FormControl(this.task?.description, [Validators.required, Validators.maxLength(500)]),
       taskDueDate: new FormControl(
         this.task ? this.task.dueDate.toISOString().slice(0, 16) : null,
         Validators.required
@@ -96,9 +96,19 @@ export class UpsertTaskComponent implements OnInit {
           message: 'Title is a required field',
         },
         {
+          field: 'taskTitle',
+          type: 'maxlength',
+          message: 'Title can be at most 200 characters',
+        },
+        {
           field: 'taskDescription',
           type: 'required',
           message: 'Description is a required field',
+        },
+        {
+          field: 'taskDescription',
+          type: 'maxlength',
+          message: 'Description can be at most 500 characters',
         },
         {
           field: 'taskDueDate',

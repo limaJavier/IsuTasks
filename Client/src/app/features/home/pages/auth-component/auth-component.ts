@@ -15,8 +15,8 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 export class AuthComponent implements OnInit {
   @Input() register!: boolean;
   form = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]),
   });
   validationMessage: string | null = null;
 
@@ -86,6 +86,11 @@ export class AuthComponent implements OnInit {
           message: 'Password must be 8 characters at least',
         },
         {
+          field: 'password',
+          type: 'maxlength',
+          message: 'Password can be at most 100 characters',
+        },
+        {
           field: 'email',
           type: 'required',
           message: 'Email is a required field',
@@ -94,6 +99,11 @@ export class AuthComponent implements OnInit {
           field: 'email',
           type: 'email',
           message: 'Email must be in a valid format',
+        },
+        {
+          field: 'email',
+          type: 'maxlength',
+          message: 'Email can be at most 100 characters',
         },
       ],
       this.form

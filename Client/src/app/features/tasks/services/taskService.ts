@@ -21,7 +21,12 @@ export class TaskService {
   }
 
   getTasks(): Observable<Task[]> {
-    return this.httpClient.get<Task[]>(TaskService._apiUrl + '/tasks');
+    return this.httpClient.get<Task[]>(TaskService._apiUrl + '/tasks').pipe(
+      map((tasks) => {
+        tasks.forEach((task) => (task.dueDate = new Date(task.dueDate)));
+        return tasks;
+      })
+    );
   }
 
   createTask(task: Omit<Task, 'id'>): Observable<Object> {
@@ -31,7 +36,7 @@ export class TaskService {
   updateTask(task: Task): Observable<Object> {
     return this.httpClient.put(TaskService._apiUrl + '/tasks', task);
   }
-  
+
   deleteTask(id: string): Observable<Object> {
     return this.httpClient.delete(TaskService._apiUrl + `/tasks/${id}`);
   }

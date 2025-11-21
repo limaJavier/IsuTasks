@@ -12,7 +12,7 @@
         </div>
         <div class="task-details-container">
           <a [routerLink]="['/tasks', task.id, 'details']">{{ task.title }}</a>
-          <p>{{ task.dueDate }}</p>
+          <p>{{ task.dueDate.toLocaleString() }}</p>
         </div>
         <div class="action-buttons-container">
           <button (click)="goToUpsertTask(task.id)">Update</button>

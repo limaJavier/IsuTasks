@@ -3,6 +3,6 @@
 <div class="task-container">
   <p><strong>Title:</strong>{{ task.title }}</p>
   <p><strong>Description:</strong>{{ task.description }}</p>
-  <p><strong>DueDate:</strong>{{ task.dueDate }}</p>
+  <p><strong>DueDate:</strong>{{ task.dueDate.toLocaleString() }}</p>
   <p><strong>IsCompleted:</strong>{{ task.isCompleted }}</p>
 </div>
