@@ -16,8 +16,11 @@ namespace IsuTasks.Api;
 public static class DependencyInjection
 {
     private const string connectionStringKey = "IsuTask";
+    public const string CorsAllowAnyOriginPolicy = "CorsAllowAnyOriginPolicy";
+
     public static IServiceCollection RegisterDependencies(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddCors();
         services.AddAuth();
         services.AddServices(configuration);
         services.AddMappings();
@@ -74,9 +77,24 @@ public static class DependencyInjection
         config.Scan(
             typeof(DependencyInjection).Assembly
         );
-        
+
         services.AddSingleton(config);
         services.AddScoped<IMapper, ServiceMapper>();
+        return services;
+    }
+
+    private static IServiceCollection AddCors(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy(CorsAllowAnyOriginPolicy,
+                policy =>
+                {
+                    policy.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+        });
         return services;
     }
 }
