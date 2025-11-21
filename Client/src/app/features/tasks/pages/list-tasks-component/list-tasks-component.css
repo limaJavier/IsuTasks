@@ -7,10 +7,11 @@
 .add-task-button {
   border: none;
   border-radius: 10px;
-  font-size: 1em;
+  font-size: 1.2em;
   padding: 10px;
   color: rgb(255, 255, 255);
   background-color: rgb(40, 40, 40);
+  margin-bottom: 1em;
 }
 
 .add-task-button:hover {
@@ -71,7 +72,7 @@ ul {
 .action-buttons-container button {
   border: none;
   border-radius: 10px;
-  font-size: 1em;
+  font-size: 1.2em;
   padding: 10px;
   color: rgb(255, 255, 255);
   background-color: rgb(40, 40, 40);
