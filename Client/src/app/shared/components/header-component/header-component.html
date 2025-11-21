@@ -1,16 +1,20 @@
 <div class="header">
-  @if (backUrl) {
-  <button [routerLink]="backUrl">Back</button>
-  }
+  <div class="header-back">
+    @if (backUrl) {
+    <button [routerLink]="backUrl" class="navigation-button back-button">Back</button>
+    }
+  </div>
 
-  <p>ISU Tasks</p>
+  <div class="header-name">
+    <p>ISU Tasks</p>
+  </div>
 
-  <div class="auth-container">
+  <div class="header-auth">
     @if (authorized === false) {
-    <button routerLink="/register">Register</button>
-    <button routerLink="/login">Login</button>
+    <button routerLink="/register" class="navigation-button register-button">Register</button>
+    <button routerLink="/login" class="navigation-button login-button">Login</button>
     } @if (authorized === true) {
-    <button (click)="logout()">Logout</button>
+    <button (click)="logout()" class="navigation-button">Logout</button>
     }
   </div>
 </div>

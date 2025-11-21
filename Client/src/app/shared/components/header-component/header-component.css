@@ -1,0 +1,61 @@
+.header {
+  background-color: rgb(40, 40, 40);
+  display: flex;
+  justify-content: space-evenly;
+  color: rgb(255, 255, 255);
+}
+
+.header-back {
+  width: 300px;
+  display: flex;
+}
+
+.header-auth {
+  width: 300px;
+  display: flex;
+}
+
+.header-name {
+  flex-grow: 1;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.header-name p {
+  font-size: 2em;
+}
+
+.navigation-button {
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 300;
+}
+
+.navigation-button:hover {
+  color: rgb(150, 150, 150);
+}
+
+.navigation-button:active{
+    color:  rgb(100, 100, 100);;
+}
+
+div .back-button {
+  flex: 0;
+  margin-left: 2%;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+/* .register-button {
+    background-color: green;
+}
+
+.login-button {
+    background-color: blue;
+} */
