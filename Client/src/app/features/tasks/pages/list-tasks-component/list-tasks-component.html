@@ -1,15 +1,25 @@
 <header-component [authorized]="true" [backUrl]="null" />
 
-<ul>
-  <button (click)="goToUpsertTask()">Add Task</button>
-  @for (task of tasks; track task.id) {
-  <li>
-    <div class="task-container">
-      <input type="checkbox" [checked]="task.isCompleted" (click)="toggleTask(task)" />
-      <a [routerLink]="['/tasks', task.id, 'details']">{{ task.title }} | {{ task.dueDate }}</a>
-      <button (click)="goToUpsertTask(task.id)">Update</button>
-      <button (click)="deleteTask(task.id)">Delete</button>
-    </div>
-  </li>
-  }
-</ul>
+<div class="main-container">
+  <button (click)="goToUpsertTask()" class="add-task-button">Add Task</button>
+
+  <ul>
+    @for (task of tasks; track task.id) {
+    <li>
+      <div class="task-container">
+        <div class="checkbox-container">
+          <input type="checkbox" [checked]="task.isCompleted" (click)="toggleTask(task)" />
+        </div>
+        <div class="task-details-container">
+          <a [routerLink]="['/tasks', task.id, 'details']">{{ task.title }}</a>
+          <p>{{ task.dueDate }}</p>
+        </div>
+        <div class="action-buttons-container">
+          <button (click)="goToUpsertTask(task.id)">Update</button>
+          <button (click)="deleteTask(task.id)">Delete</button>
+        </div>
+      </div>
+    </li>
+    }
+  </ul>
+</div>

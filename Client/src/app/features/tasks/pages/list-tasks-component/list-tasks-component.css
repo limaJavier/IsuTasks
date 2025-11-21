@@ -1,0 +1,91 @@
+.main-container {
+  width: 50%;
+  margin: auto;
+  margin-top: 1.5em;
+}
+
+.add-task-button {
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  padding: 10px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(40, 40, 40);
+}
+
+.add-task-button:hover {
+  background-color: rgb(100, 100, 100);
+}
+
+.add-task-button:active {
+  background-color: rgb(150, 150, 150);
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.task-container {
+  display: flex;
+  gap: 1em;
+}
+
+.checkbox-container {
+  width: 20px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.checkbox-container input {
+  accent-color: rgb(40, 40, 40);
+  transform: scale(1.5);
+}
+
+.task-details-container {
+  flex-grow: 1;
+  text-align: left;
+  overflow: hidden;
+  font-size: 1.5em;
+}
+
+.task-details-container a {
+  font-weight: bolder;
+  text-decoration: none;
+  margin-bottom: 0;
+  color: rgb(100, 100, 100);
+}
+
+.task-details-container a:hover {
+  color: rgb(40, 40, 40);
+}
+
+.task-details-container p {
+  margin-top: 0;
+}
+
+.action-buttons-container {
+  width: 100px;
+  display: flex;
+  gap: 3px;
+  align-items: flex-start;
+}
+
+.action-buttons-container button {
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  padding: 10px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(40, 40, 40);
+}
+
+.action-buttons-container button:hover {
+  background-color: rgb(100, 100, 100);
+}
+
+.action-buttons-container button:active {
+  background-color: rgb(150, 150, 150);
+}
