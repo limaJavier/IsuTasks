@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: isutasks-server
+    build: ./Server
+    ports:
+      - "9090:9090"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__IsuTasks=Host=database;Port=5432;Database=IsuTasks;Username=postgres;Password=postgres
+    depends_on:
+      - database
+    
+  database:
+    container_name: isutasks-database
+    image: postgres:17
+    ports:
+      - "25432:5432"
+    environment:
+      POSTGRES_DB: IsuTasks
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+

@@ -15,7 +15,7 @@ namespace IsuTasks.Api;
 
 public static class DependencyInjection
 {
-    private const string connectionStringKey = "IsuTask";
+    private const string connectionStringKey = "IsuTasks";
     public const string CorsAllowAnyOriginPolicy = "CorsAllowAnyOriginPolicy";
 
     public static IServiceCollection RegisterDependencies(this IServiceCollection services, IConfiguration configuration)
